@@ -19,7 +19,7 @@ public class CorsGlobalConfig implements WebMvcConfigurer {
             public void addCorsMappings(CorsRegistry registry) {
                 // Agrega configuración de CORS para todas las rutas (/**)
                 registry.addMapping("/**")
-                        .allowedOrigins("*") // Permite solicitudes de cualquier origen. En producción, reemplaza "*" con las URLs específicas de tus frontends para mayor seguridad
+                        .allowedOrigins("https://reservasvehiculos-railway-production.up.railway.app/") // Permite solicitudes de cualquier origen. En producción, reemplaza "*" con las URLs específicas de tus frontends para mayor seguridad
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS"); // Especifica los métodos HTTP permitidos para las solicitudes CORS
             }
         };
