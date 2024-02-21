@@ -1,0 +1,25 @@
+spring:
+
+  profiles:
+    active: test
+
+  datasource:
+    url: jdbc:h2:mem:vehicle_reservation_system
+    username: sa
+    driver-class-name: org.h2.Driver
+    password: Test@123!
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+
+application:
+  security:
+    jwt:
+      secret-key: d5608c2a97c84dd0c0e0374ab865a131e0305df3f642ff83a03d796d748ac251
+      expiration: 86400000 # a day
