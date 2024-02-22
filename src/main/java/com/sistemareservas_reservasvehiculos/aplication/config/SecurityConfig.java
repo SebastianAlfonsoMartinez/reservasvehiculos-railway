@@ -10,7 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -22,6 +24,8 @@ public class SecurityConfig {
     private final JwtFilter jwtFilter;
     // Proveedor de autenticación personalizado para integrar con la lógica de autenticación existente
     private final AuthenticationProvider authenticationProvider;
+
+    private  final CorsFilter corsFilter;
 
     // Lista de URLs que no requieren autenticación. Todas las demás solicitudes necesitarán estar autenticadas.
     private static final String[] WHITE_LIST_URL = {
@@ -36,6 +40,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .addFilterBefore(corsFilter, ChannelProcessingFilter.class)
                 .csrf(AbstractHttpConfigurer::disable) // Desactiva la protección CSRF, común en APIs REST
                 .authorizeHttpRequests( // Configura las reglas de autorización
                         req -> req
